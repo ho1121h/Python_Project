@@ -1,7 +1,8 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse, redirect
 import random
+from django.views.decorators.csrf import csrf_exempt # csrf skipping
 
-
+NextId=4
 topics = [
     {'id': 1,'title': 'routing','body':'routing is....'},
     {'id': 2,'title': 'view','body':'view is....'},
@@ -22,6 +23,9 @@ def HTMLTemplate(articleTag):
             {ol}
         </ul>   
           {articleTag}
+          <ul>
+          <li><a href="/create/">create</a></li>
+          </ul>
      </body>
      </html>
     ''' 
@@ -44,6 +48,27 @@ def read(request,id):
     return HttpResponse(HTMLTemplate(article))
 
 
+@csrf_exempt
+def create(request): # 사용자의 데이터를 받아들이고 어떻게 사용할 것인가?
+    # create : form 은 데이터를 전송해주고, input 태그로 게시글 정보를 받는다
+    global NextId
+    if request.method == 'GET':
+        article = '''
+        <form action = "/create/" method="post">
+            <p>  <input type="text" name="title" placeholder="title"> </p>
+            <p><textarea name="body" placeholder="body"></textarea></p>
+            <p><input type="submit"  ></p>
+        </form>
+    '''
+        return HttpResponse(HTMLTemplate(article))
+    
+    elif request.method == 'POST': # 게시물을 등록하는 호출이면 다음값을 리턴
+        title = request.POST['title'] 
+        body = request.POST['body']
+        newtopic = {'id':NextId,'title': title, 'body': body}
+       
+        topics.append(newtopic)
+        url = '/read/'+str(NextId)
+        NextId +=1
+        return redirect(url)
 
-def create(request):
-    return HttpResponse('Create!')
