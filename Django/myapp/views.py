@@ -20,7 +20,8 @@ def HTMLTemplate(articleTag, id=None): # 기본적인 템플릿(홈)
                     <input type="submit" value="delete">
                 </form>
             </li>
-'''
+            <li><a href="/update/{id}">Update</a></li> 
+''' # 업데이트 기능 추가
     ol = ''
     for topic in topics:
         ol += f'<li><a href="/read/{topic["id"]}">{topic["title"]}</a></li>' #포스트 로딩 및 버튼 생성
@@ -84,6 +85,36 @@ def create(request): # 사용자의 데이터를 받아들이고 어떻게 사�
         url = '/read/'+str(NextId)
         NextId +=1
         return redirect(url)
+
+@csrf_exempt
+def update(request,id):
+    global topics
+    if request.method == 'GET':
+        for topic in topics:
+            if topic['id'] == int(id):
+                selectedTopic= {
+                    "title": topic['title'],
+                    "body": topic['body'],
+                }
+        # UI 설정
+        article = f'''
+        <form action = "/update/{id}/" method="post">
+            <p><input type="text" name="title" placeholder="title" value = {selectedTopic["title"]}></p>
+            <p><textarea name="body" placeholder="body">{selectedTopic["body"]}</textarea></p>
+            <p><input type="submit"  ></p>
+        </form>
+        '''
+       
+        return HttpResponse(HTMLTemplate(article,id))
+    elif request.method == 'POST':        
+        title = request.POST['title']
+        body = request.POST['body']
+        for topic in topics:
+            if topic['id'] == int(id):
+                topic['title'] = title
+                topic['body'] = body
+        # 위 과정이 성공한다면 /read/id 로 이동
+        return redirect(f'/read/{id}')
 
 @csrf_exempt
 def delete(request):
