@@ -4,4 +4,7 @@
      1. 랭체인 및 GPT 3.5를 이용
      2. UI : Gradio
 
- ## 2. 미정
+ ## 2. Django 
+
+     1. 튜토리얼 (myproject01, myapp)
+     2. 인스타그램 클론코딩 (Jinstagram)
