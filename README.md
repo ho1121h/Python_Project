@@ -6,5 +6,5 @@
 
  ## 2. Django 
 
-     1. 튜토리얼
-     2. 인스타그램 클론코딩
+     1. 튜토리얼 (myproject01, myapp)
+     2. 인스타그램 클론코딩 (Jinstagram)
