@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition  앱으로 인식
+# Application definition  각 앱을 추가하는 이유 : 모델 생성 후 마이그레이션을 할때 인식한다
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
