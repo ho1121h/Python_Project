@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 class Sub(APIView):
     def get(self,request):
-        print("Get ~ ")
+        
         return render(request,'jinstagram/main.html')
 
     def post(self, request):
