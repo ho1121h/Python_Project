@@ -180,17 +180,20 @@
 
 <!-- 바디 영역 -->
 <div class="main_body">
+     {% for feed in feeds %}
     <div class="left_body">
-        <div class="border feed_box">
+          <div class="border feed_box">
             <div class="feed_name">
                 <div class="profile_box">
                     <img class="profile_img"
-                         src="data:image/jpeg;base64,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">
+                         src="{{ feed.profile_image }}">
                 </div>
-                <span class="feed_name_txt">ho1121h</span>
+                <span class="feed_name_txt">
+                    {{ feed.user_id }}
+                </span>
             </div>
             <img class="feed_img"
-                 src="https://i.namu.wiki/i/9qwvY95bmkj5R6XA43VifN7uu2dPTSfs6N2HboeD3g1zS0ONoDtMuaheUzl02Sh2bytDdLA8DoOqbbrXWtKxTQ.webp">
+                 src="{{ feed.image }}">
 
             <div class="feed_icon">
                 <div>
@@ -211,17 +214,19 @@
                 </div>
             </div>
             <div class="feed_like">
-                <p class="feed_txt"><b>좋아요 10개</b></p>
+                <p class="feed_txt"><b>좋아요 {{ feed.like_count }}개</b></p>
             </div>
             <div class="feed_content">
-                <p class="feed_txt"><b> ho1121h </b> 별이 아름답네용</p>
+                <p class="feed_txt"><b> {{ feed.user_id }} </b> {{ feed.content }}</p>
             </div>
             <div class="feed_reply">
                 <span class="feed_txt"> <b> profess </b> 해바라기는 안그리시나요?</span>
                 <span class="feed_txt"> <b> cho </b> 귀는 잘계신지? </span>
             </div>
         </div>
+        {% endfor %}
 
+    <!-- feed box 2-->
         <div class="left_body">
             <div class="border feed_box">
                 <div class="feed_name">
