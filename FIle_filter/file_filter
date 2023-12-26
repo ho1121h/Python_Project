@@ -1,0 +1,35 @@
+import os
+import shutil
+
+def classify_files(source_folder, dest_folder, ignored_extensions=[]):
+    for filename in os.listdir(source_folder):
+        file_path = os.path.join(source_folder, filename)
+
+        if os.path.isfile(file_path):
+            file_extension = filename.split('.')[-1]
+            
+            # 특정 확장자를 무시할 경우 해당 확장자가 리스트에 있는지 확인
+            if file_extension.lower() in ignored_extensions:
+                print(f"Ignoring file with extension {file_extension}: {filename}")
+                continue
+            
+            dest_folder_path = os.path.join(dest_folder, file_extension)
+
+            if not os.path.exists(dest_folder_path):
+                os.makedirs(dest_folder_path)
+
+            shutil.move(file_path, os.path.join(dest_folder_path, filename))
+
+def main():
+    source_folder = "C:/Users/ho316s/Downloads"
+    dest_folder = "C:/Users/ho316/Desktop/work"
+
+    # 무시할 확장자를 여기에 추가 (소문자로)
+    ignored_extensions = ['exe', 'zip', 'rar', '7z', 'jpeg','png','jpg',
+                          'bmp', '']
+
+    classify_files(source_folder, dest_folder, ignored_extensions)
+    print("파일이 성공적으로 분류되었습니다.")
+
+if __name__ == "__main__":
+    main()
