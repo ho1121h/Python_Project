@@ -8,3 +8,8 @@
 
      1. 튜토리얼 (myproject01, myapp)
      2. 인스타그램 클론코딩 (Jinstagram)
+
+ ## 3. File_Filter
+
+     1. 파이썬으로 생성
+     2. 설정한 확장자명으로 파일 분류함
